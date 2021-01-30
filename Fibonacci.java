@@ -1,19 +1,19 @@
-package Java_201218;
-//求斐波那契数列的第n项。(迭代实现)
+package Java_210129;
+//递归求斐波那契数列的第 N 项
 public class Fibonacci {
     public static void main(String[] args) {
-        int num1 = 1;
-        int num2 = 1;
-        int num3=0;
-        int n =10;
-        System.out.println(num1);
-        System.out.println(num2);
-        for (int i = 3; i <=n; i++) {
-            num3=num2+num1;
-            System.out.println(num3);
-            num1=num2;
-            num2=num3;
-        }
+        System.out.println("求斐波那契数列的第N项");
+        int n =6;
+        System.out.println(fibonacci(n));
     }
 
+    private static int fibonacci(int n) {
+           if (n==1||n==2){
+               return 1;
+            }
+            else{
+                return fibonacci(n-1)+fibonacci(n-2);
+           }
+
+    }
 }
