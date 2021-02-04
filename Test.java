@@ -1,79 +1,19 @@
-package Java_210129;
-
-import java.util.ArrayList;
-import java.util.List;
-
+package Java_210201;
+//åˆ¤æ–­å­˜ä¸å­˜åœ¨ä¸‰ä¸ªè¿ç»­çš„å¥‡æ•°
 public class Test {
-    public boolean threeConsecutiveOdds(int[] arr) {
-        // ±éÀúÊı×é, ÕÒµ½ËùÓĞ¿ÉÄÜ´æÔÚµÄĞòÁĞ, ²¢ÅĞ¶Ï¾Í¿ÉÒÔÁË.
-        for (int i = 0; i < arr.length - 2; i++) {
-            if (arr[i] % 2 != 0 && arr[i+1] % 2 != 0 && arr[i+2] % 2 != 0) {
+    public static void main(String[] args) {
+        int[] arr = {1, 2,3};
+        System.out.println(threeConsecutiveOdds(arr));
+    }
+
+
+    public static boolean threeConsecutiveOdds(int[] arr) {
+        //ä¾¿åˆ©æ•°ç»„,æ‰¾åˆ°æ‰€æœ‰å¯èƒ½çš„åºåˆ—å¹¶åˆ¤æ–­
+        for (int i = 0 ; i<arr.length-2;i++){
+            if (arr[i]%2!=0&&arr[i+1]%2!=0&&arr[i]%2!=0){
                 return true;
             }
         }
         return false;
-    }
-
-    // Õâ¸ö´úÂë²»ÊÇÌâÄ¿ÒªÇóµÄ°æ±¾. ËùÒÔÄãÈç¹û°ÑÕâ¸ö´úÂëÌá½»½øÈ¥, Ò»¶¨ÊÇ±àÒë²»ÁËµÄ~~
-    public boolean threeConsecutiveOdds(List<Integer> arr) {
-        for (int i = 0; i < arr.size() - 2; i++) {
-            if (arr.get(i) % 2 != 0 && arr.get(i+1) % 2 != 0 && arr.get(i+2) % 2 != 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Ñî»ÔÈı½Ç
-    public List<List<Integer>> generate(int numRows) {
-        if (numRows <= 0) {
-            // Ö±½Ó·µ»ØÒ»¸ö¿ÕµÄ List
-            return new ArrayList<>();
-        }
-        // result ÓÃÀ´±íÊ¾×îÖÕ½á¹û, Õâ¸ö result ÖĞ¾Í°üº¬ÁËÈô¸ÉĞĞ
-        List<List<Integer>> result = new ArrayList<>();
-        // ´¦ÀíµÚ 1 ĞĞ, ¾ÍÊÇ¹Ì¶¨µÄÒ»¸ö 1
-        List<Integer> firstLine = new ArrayList<>();
-        firstLine.add(1);
-        result.add(firstLine);
-        if (numRows == 1) {
-            // ²ÎÊıÎª 1 µÄÊ±ºò, ·µ»Ø½á¹û:
-            // [
-            //   [1]
-            // ]
-            return result;
-        }
-        // ´¦ÀíµÚ 2 ĞĞ, ¾ÍÊÇ¹Ì¶¨µÄÁ½¸ö 1
-        List<Integer> secondLine = new ArrayList<>();
-        secondLine.add(1);
-        secondLine.add(1);
-        result.add(secondLine);
-        if (numRows == 2) {
-            return result;
-        }
-        // 3. ´¦ÀíºóĞøµÚ i ĞĞµÄÇé¿öÁË
-        //  a) Ã¿Ò»ĞĞµÄµÚÒ»¸öÔªËØºÍ×îºóÒ»¸öÔªËØ, ¶¼ÊÇ 1
-        //  b) Ã¿Ò»ĞĞµÄÁĞÊı¶¼ÊÇºÍĞĞÊıÏàÍ¬
-        //  c) i, j => i-1,j-1 + i-1,j
-        for (int row = 3; row <= numRows; row++) {
-            // µ±Ç°ĞĞÊÇ row, ÉÏÒ»ĞĞ¾ÍÊÇ row - 1.
-            // ´Ë´¦µÄ row ÊÇ´Ó 1 ¿ªÊ¼¼ÆËãµÄ. ¶ø List ÏÂ±êÊÇ´Ó 0 ¿ªÊ¼ËãµÄ. »¹ĞèÒªÔÙ - 1
-            // ²»½¨ÒéĞ´³É row - 2
-            List<Integer> prevLine = result.get(row - 1 - 1);
-            List<Integer> currentLine = new ArrayList<>();
-            currentLine.add(1); // µÚÒ»ÁĞ
-            // ´¦ÀíÖĞ¼äµÄÕâĞ©ÁĞ
-            for (int col = 2; col <= row - 1; col++) {
-                // Õâ¸öÑ­»·ÖĞĞèÒªÒÀÀµÉÏÒ»ĞĞµÄÊı¾İ
-                // »ñÈ¡µ½ÉÏÒ»ĞĞµÄÁ½¸ö¶ÔÓ¦ÔªËØ
-                int num1 = prevLine.get(col - 1);  // »ñÈ¡µ½ row-1,col  Ö»²»¹ıĞèÒª°Ñ col ×ª³ÉÏÂ±ê, »¹ĞèÒª -1
-                int num2 = prevLine.get(col - 1 - 1); // »ñÈ¡µ½ row-1, col-1, Ò²ĞèÒª°Ñ col ×ª³ÉÏÂ±ê, Ò²ÒªÔÙ - 1
-                currentLine.add(num1 + num2);
-            }
-            currentLine.add(1); // ×îºóÒ»ÁĞ
-            // °Ñµ±Ç°ĞĞ, ·Åµ½×îÖÕµÄ½á¹ûÖĞ
-            result.add(currentLine);
-        }
-        return result;
     }
 }
