@@ -1,19 +1,15 @@
-package Java_210202;
-//鎵戝厠鐗岀被
+package Java_210131;
+//扑克牌类
 public class Card {
-    //鑺辫壊
-    public String suit;
-    //鐐规暟
-    public String rank;
+    //构建牌的基本信息：花色和点数
+    public String huase;
+    public String dianshu;
 
-    public Card(String suit, String rank) {
-        this.suit = suit;
-        this.rank = rank;
+    public Card(String huase,String dianshu){
+        this.huase=huase;
+        this.dianshu =dianshu;
     }
-    //閲嶅啓tostring鏂规硶
 
     @Override
-    public String toString() {
-        return "[" + this.suit+this.rank+"]";
-    }
+    public String toString(){return "["+this.huase+this.dianshu+"]";}
 }

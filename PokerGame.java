@@ -1,61 +1,109 @@
-package Java_210202;
+package Java_210131;
+
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 
-
-//æ‰‘å…‹ç‰Œæ¸¸æˆ
+//ÆË¿ËÅÆÓÎÏ·
+//Ã¿ÓĞÒ»×é£¨Á½ÕÅ£©»¨É«ÏàÍ¬µÄÆË¿ËÅÆ¾Í»ı1·Ö£¬·ÖÊı×î¸ßµÄÍæ¼Ò»ñÊ¤
+//Èô´æÔÚµÃ·ÖÏàÍ¬µÄÇé¿ö£¬Íæ¼ÒĞòºÅ´óµÄÈË»ñÊ¤¡£
 public class PokerGame {
-    //é‡Œé¢æ”¾ç½®å››ç§èŠ±è‰²
-    public static final String[] suits ={"â™¥","â™ ","â™£","â™¦"};
+    public static void main(String[] args) {
+        //0²Ëµ¥
+        System.out.println("»¶Ó­Ê¹ÓÃÆË¿ËÅÆÓÎÏ·£¡");
+        //1¹¹½¨Ò»¸±ÆË¿ËÅÆ
+        List<Card> poker=buyPoker();
+        //TODO ²âÊÔ
+        //System.out.println(poker);
+        //2´òÂÒÆË¿ËÅÆ
+        Collections.shuffle(poker);
+        //TODO ²âÊÔ
+        //System.out.println(poker);
+        //3.ÎªÃ¿Î»Íæ¼Ò·¢ÅÆ£¬Ã¿¸öÍæ¼Ò¶¼ÊÇÒ»¸öList<Card>
+        //¼ÙÉèÓĞÈı¸öÍæ¼Ò£¬Ã¿¸öÍæ¼Ò·¢ÎåÕÅÅÆ£¬´ÓpokerÅÆ¶ÑÖĞ³éÈ¡ÅÆ
+        List<List<Card>> players=player(3,5,poker);
+        //4.Õ¹Ê¾ÊÖÅÆ
 
-    public static List<Card> buyPoker(){
-        List<Card> poker=new ArrayList<>();
-        //å¤„ç†å››ç§èŠ±è‰²
-        for (int i=0;i<4;i++){
-            //å†…å±‚æ§åˆ¶åä¸‰å¼ ç‰Œ
-            for (int j = 2; j <=10 ; j++) {
-                //å°†ç‰Œæ·»åŠ åˆ°æ•°ç»„ä¸­ï¼ŒèŠ±è‰²ï¼Œæ•°å­—ï¼ˆåˆ©ç”¨valueofå°†intè½¬æ¢æˆstringç±»å‹ï¼‰
-                poker.add(new Card(suits[i],String.valueOf(j)));
+        for (int i = 0; i <players.size(); i++) {
+            //playerÖĞ±£´æÃ¿Î»Íæ¼ÒµÄÊÖÅÆ
+            List<Card> player =players.get(i);
+            //5ÒÀ´ÎÊä³ö½á¹û
+            System.out.println("Íæ¼Ò"+(i+1)+"µÄÊÖÅÆÊÇ"+player);
+        }
+        //6ÅĞ¶¨Ê¤¸º
+        result(players);
+
+
+    }
+
+    private static void result(List<List<Card>> players) {
+        //´´½¨Ò»¸öÊı×é´¢´æÃ¿Î»Íæ¼ÒµÄ³É¼¨
+            int[] numResult =new int[players.size()];
+            //Ã¿¸öÍæ¼ÒÈôÓĞÏàÍ¬»¨É«µÄÅÆÔòµÃ·Ö+1£»
+        for (int i = 0; i <players.size() ; i++) {
+            int count =0;
+            List<Card> player =players.get(i);
+            for (int j = 0; j <player.size()-1 ; j++) {
+                for (int k = j+1; k <player.size() ; k++) {
+                    if (player.get(j).huase.equals(player.get(k).huase)){
+                        count++;
+                    }
+                }
             }
-            poker.add(new Card(suits[i],"J"));
-            poker.add(new Card(suits[i],"Q"));
-            poker.add(new Card(suits[i],"K"));
-            poker.add(new Card(suits[i],"A"));
+            numResult[i]=count;
+        }
+        //Ñ¡³öµÃ·Ö×î¸ßµÄÍæ¼Ò
+        int max =0;
+        for (int i = 1; i <numResult.length ; i++) {
+            if (numResult[max]<=numResult[i]){
+                max=i;
+            }
+        }
+        System.out.println("»ñÊ¤µÄÊÇ£º"+(max+1)+"ºÅÍæ¼Ò¡£\nËûµÄµÃ·ÖÊÇ"+numResult[max]+"·Ö¡£ËûµÄÊÖÅÆÊÇ£º"+players.get(max));
+    }
+
+    private static List<List<Card>> player(int playerNumber,int CardsNumber,List<Card> poker) {
+        List<List<Card>> players=new ArrayList<>();
+        //¸ù¾İÍâ²¿ÊıÁ¿Ìí¼ÓÍæ¼Ò¸öÊı
+        for (int i = 0; i <playerNumber ; i++) {
+            players.add(new ArrayList<>());
+        }
+        //¼ÙÉèÃ¿ÈË·¢5ÕÅÅÆ
+        //Íâ²ã¿ØÖÆÅÆÊı
+        for (int i = 0; i <CardsNumber ; i++) {
+            //ÄÚ²ã¿ØÖÆ·¢ÅÆµÄÈË
+            for (int j = 0; j <playerNumber ; j++) {
+                //1.´ÓÅÆ¿âÀïÃæ³éÈ¡Ò»ÕÅÅÆ£¨³éÈ¡ºóÆäËûÈË³é²»µ½´ËÅÆ£©
+                //removeÒÆ³ıÁĞ±íÖ¸¶¨Î»ÖÃµÄÒ»¸öÔªËØ£¬½«¸ÃÔªËØºóÃæµÄÔªËØÃÇÍù×óÒÆ¶¯Ò»Î»¡£·µ»Ø±»ÒÆ³ıµÄÔªËØ¡£
+                Card card =poker.remove(0);
+                //2.Ã¿¸öÈË·ÖµÄµ½Ò»ÕÅÅÆ
+                List<Card> player =players.get(j);
+                player.add(card);
+            }
+        }
+        return players;
+    }
+
+
+    private static List<Card> buyPoker() {
+        List<Card> poker =new ArrayList<>();
+        String[] huase ={"ºìÌÒ","ºÚÌÒ","·½Æ¬","²İ»¨"};
+        //Íâ²ã¿ØÖÆ»¨É«
+        for (int i = 0; i <huase.length ; i++) {
+            //ÄÚ²ã¿ØÖÆµãÊı
+            for (int j = 2; j <=10 ; j++) {
+                //poker.add(CardÀà)ĞèÒªnewÒ»¸öCard²Å¿ÉÒÔ¸³Öµ
+                poker.add(new Card(huase[i],String.valueOf(j)));
+            }
+            poker.add(new Card(huase[i],"J"));
+            poker.add(new Card(huase[i],"Q"));
+            poker.add(new Card(huase[i],"K"));
+            poker.add(new Card(huase[i],"A"));
         }
         poker.add(new Card("","JOKER"));
         poker.add(new Card("","joker"));
         return poker;
     }
-    //listæœ¬èº«å°±æ˜¯å¯å˜å¯¹è±¡ï¼Œç›´æ¥å°±å¯ä»¥ä¿®æ”¹,æ— éœ€è¿”å›list<card>
-    private static void shuffle(List<Card> poker){
-        Random random =new Random();
-        //TODO,i?
-        for (int i=poker.size()-1;i>0;i--){
-            //äº§ç”Ÿ[0,i)çš„éšæœºæ•°,è¦å’Œå“ªä¸ªä½ç½®çš„å…ƒç´ è¿›è¡Œäº¤æ¢;
-            //random.nextInt(int i).è¾“å‡ºä¸€ä¸ª[0,i)çš„éšæœºå€¼
-            int pos =random.nextInt(i);
-            swap(poker,i,pos);
-
-        }
-    }
-
-    private static void swap(List<Card> poker,int i,int j){
-                     Card tmp=poker.get(i);
-                     poker.set(i,poker.get(j));
-                     poker.set(j,tmp);
-    }
-
-    public static void main(String[] arg){
-        //1.åˆ›å»ºä¸€å‰¯æ‰‘å…‹ç‰Œ
-        List<Card> poker =buyPoker();
-        System.out.println(poker);
-        System.out.println(poker.get(0));
-        //2.æ´—ç‰Œï¼Œä»å‰å¾€åéå†æ•°ç»„ï¼Œä¸ä¹‹å‰çš„ä»»æ„ä¸€ä¸ªäº¤æ¢ä½ç½®
-        shuffle(poker);
-        System.out.println(poker);
-    }
-
 }
