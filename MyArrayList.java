@@ -140,7 +140,7 @@ public class MyArrayList {
     //9.查找元素位置(从后往前找)
     public int listIndexOf(String elem){
 
-        for ( int index = size-1; index >=0 ; index++) {
+        for ( int index = size-1; index >=0 ; index--) {
             if (data[index].equals(elem)){
                 return index;
             }
