@@ -228,11 +228,11 @@ public class MyArrayList {
         myArrayList.add("java");
         myArrayList.add("python");
         //7.判断元素是否存在
-        myArrayList.contains("c");
+        System.out.println(myArrayList.contains("C++"));
         //8判断元素位置
-        myArrayList.indexOf("c++");
+        System.out.println(myArrayList.indexOf("c"));
         //9判断元素位置(从后往前)
-        myArrayList.listIndexOf("c++");
+        System.out.println(myArrayList.listIndexOf("c++"));
     }
 
     public static void sizeTest(){
