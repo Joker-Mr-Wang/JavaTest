@@ -31,16 +31,22 @@ public class Main1 {
         return dummy;
     }
     public static void main(String[] args) {
+        //不带傀儡节点的删除
         Node head =createNode();
-         //newHead是被修改后的头节点
+        //newHead是被修改后的头节点
         //要想修改头结点需要返回值
-        Node newHead=remove(head,0);
-        print(newHead);
+        head=remove(head,1);
+        //删除尾节点
+        removeTail(head);
+        //打印链表
+        print(head);
 //        int del=2;
 //        //按照元素下标进行删除
 //        removeNode(head,2);//删除了[3]
 //        //按照元素位置进行删除
 //        removeNode(head,head.next);//删除了[2]
+
+        //不带傀儡节点的插入
 //Node head =createNode();
 //        //1.插入到链表中间
 //        //在第一个和第二个节点中插入
@@ -63,8 +69,11 @@ public class Main1 {
 //        for (Node cur=head;cur!=null;cur=cur.next){
 //            System.out.println(cur);
 //        }
-
-        //带傀儡结点的链表
+//        //带傀儡结点的链表删除
+//        Node head =createDummyNode();
+//        removeDummy(head,4);
+//        printDummy(head);
+        //带傀儡结点的链表插入
 //        Node head =createDummyNode();
 //        //一.在1,2中插入一个数字
 //        //(1)创建需要加入的结点
@@ -89,7 +98,7 @@ public class Main1 {
     }
 
     //1.1删除节点(按照位置进行删除),时间复杂度O(n)
-    private static void removeNode(Node head,Node del) {
+    private static Node removeNode(Node head,Node del) {
         //寻找到val所对应的位置以及val前一个的位置
         Node prev =head;
         while (prev!=null&&prev.next!=del){
@@ -97,21 +106,23 @@ public class Main1 {
         }
         //可能存在未找到的情况,则将函数进行返回
         if (prev==null){
-            return;
+            return head;
         }
         //找到就处理元素
         prev.next=del.next;
+        return head;
     }
     //1.2删除节点(按照位置进行删除),时间复杂度O(1)
     //这个操作无法删除掉最后一个节点,最后一个节点无法修改
-    private static void removeNode1(Node head,Node del) {
+    private static Node removeNode1(Node head,Node del) {
         //把删除元素下一个的节点内容全都放入该节点,即可完成删除
         Node delNext=del.next;
         del.val=delNext.val;
         del.next=delNext.next;
+        return head;
     }
 //2.删除节点(按照元素的值进行删除),时间复杂度O(n)
-    private static void removeNode(Node head,int val) {
+    private static Node removeNode(Node head,int val) {
         //寻找到val所对应的位置以及val前一个的位置
          Node prev =head;
          while (prev!=null&&prev.next!=null&&prev.next.val==val){
@@ -119,14 +130,15 @@ public class Main1 {
          }
          //可能存在未找到的情况,则将函数进行返回
         if (prev==null&&prev.next==null){
-            return;
+            return head;
         }
         //找到就处理元素
         Node delNode=prev.next;
         prev.next=delNode.next;
+        return head;
     }
 //3.删除节点(按照数据位置下标进行删除),时间复杂度O(n)
-    private static Node remove(Node head,int index) {
+     private static Node remove(Node head,int index) {
         Node prev=head;
         //链表为空无法删除
         if (head==null){
@@ -147,9 +159,60 @@ public class Main1 {
          prev.next=del.next;
          return head;
 }
+//3.删除节点(带傀儡节点),
+private static void removeDummy(Node head,int val) {
+        //这种不需要考虑删除head的问题,所以无需返回值void即可
+        Node prev=head;
+       //看看这是不是一个空链表
+        if (head.next==null){
+            return ;
+        }
+        while (prev!=null&&prev.next!=null&&prev.next.val!=val){
+            prev=prev.next;
+        }
+        if (prev==null||prev.next==null){
+            return;
+        }
+        Node delNode=prev.next;
+        prev.next=delNode.next;
+        return;
+}
+
+    //4.删除尾节点
+    private static void removeTail(Node head) {
+        //如果链表为空
+        if (head==null){
+            return;
+        }
+        //如果链表只有一个元素
+        if (head.next==null){
+            return ;
+        }
+        //链表有多个元素
+        Node prev=head;
+        Node del =prev.next;
+//        while(prev!=null&&prev.next!=null&&prev.next.next!=null){
+//            prev=prev.next;
+//        }
+        while(prev!=null&&prev.next!=null){
+            del=prev.next;
+            if (del.next==null){
+                break;
+            }
+            prev=prev.next;
+        }
+           prev.next=del.next;
+
+
+    }
 //遍历链表
     private static void print(Node head) {
         for (Node node=head;node!=null;node=node.next){
+            System.out.println(node);
+        }
+    }
+    private static void printDummy(Node head) {
+        for (Node node=head.next;node!=null;node=node.next){
             System.out.println(node);
         }
     }
