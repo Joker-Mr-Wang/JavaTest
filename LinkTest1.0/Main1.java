@@ -32,12 +32,15 @@ public class Main1 {
     }
     public static void main(String[] args) {
         Node head =createNode();
+         //newHead是被修改后的头节点
+        //要想修改头结点需要返回值
+        Node newHead=remove(head,0);
+        print(newHead);
 //        int del=2;
 //        //按照元素下标进行删除
 //        removeNode(head,2);//删除了[3]
 //        //按照元素位置进行删除
 //        removeNode(head,head.next);//删除了[2]
-        print(head);
 //Node head =createNode();
 //        //1.插入到链表中间
 //        //在第一个和第二个节点中插入
@@ -123,10 +126,17 @@ public class Main1 {
         prev.next=delNode.next;
     }
 //3.删除节点(按照数据位置下标进行删除),时间复杂度O(n)
-     private static void remove(Node head,int index) {
+    private static Node remove(Node head,int index) {
         Node prev=head;
+        //链表为空无法删除
+        if (head==null){
+            return null;
+        }
+        //删除头结点,需要有返回值,无返回值是无法对head进行有效操作的
+         //这里的head只存在于remove方法的栈针,我们需要作用到外面main方法中去.
         if (index==0){
-            //TODO
+            head=head.next;
+            return  head;
         }
         //寻找需要删除的前一个元素
          for (int i = 0; i <index-1; i++) {
@@ -135,8 +145,8 @@ public class Main1 {
          //进行删除
          Node del=prev.next;
          prev.next=del.next;
+         return head;
 }
-
 //遍历链表
     private static void print(Node head) {
         for (Node node=head;node!=null;node=node.next){
