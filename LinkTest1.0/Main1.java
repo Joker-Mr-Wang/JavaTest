@@ -31,15 +31,17 @@ public class Main1 {
         return dummy;
     }
     public static void main(String[] args) {
-        //不带傀儡节点的删除
-        Node head =createNode();
-        //newHead是被修改后的头节点
-        //要想修改头结点需要返回值
-        head=remove(head,1);
-        //删除尾节点
-        removeTail(head);
-        //打印链表
+        int[] arr ={1,2,3,4,5};
+        Node head =arrayLink1(arr);
         print(head);
+//        //不带傀儡节点的删除
+//        Node head =createNode();
+//        //newHead是被修改后的头节点
+//        //要想修改头结点需要返回值
+//        head=remove(head,1);
+//        //删除尾节点
+//        removeTail(head);
+//        print(head);
 //        int del=2;
 //        //按照元素下标进行删除
 //        removeNode(head,2);//删除了[3]
@@ -96,7 +98,46 @@ public class Main1 {
 //            System.out.println(cur);//[1001][1][2][3][4]
 //        }
     }
-
+//将数组改成链表(无傀儡节点)
+    private static Node arrayLink1(int[] arr) {
+        //便利数组,设置两个节点
+        //一个头结点,一个尾节点
+        Node head =null;
+        Node tail =null;
+        for (int i : arr) {
+            Node node =new Node(i);
+            //当列表为空时
+            //为头结点赋值
+            if (head==null){
+                head=node;
+                tail=node;
+            }else {
+                //后续节点
+                //将节点插入到尾部的下一个
+                tail.next = node;
+                //刷新尾部节点
+                tail = tail.next;
+            }
+        }
+        return head;
+    }
+    //将数组改成链表(有傀儡节点)
+    private static Node arrayLink2(int[] arr) {
+        //便利数组,设置两个节点
+        //一个头结点,一个尾节点
+        //这个head引用指向的是傀儡节点
+        Node head =new Node(0);
+        Node tail =head;
+        for (int i : arr) {
+            Node node =new Node(i);
+                //傀儡节点无需考虑头
+                //将节点插入到尾部的下一个
+                tail.next = node;
+                //刷新尾部节点
+                tail = tail.next;
+            }
+        return head;
+    }
     //1.1删除节点(按照位置进行删除),时间复杂度O(n)
     private static Node removeNode(Node head,Node del) {
         //寻找到val所对应的位置以及val前一个的位置
