@@ -20,6 +20,8 @@ class ListNode {
 
 public class Solution {
     // 删除链表中的所有元素
+    //需要先删除其他结点，在考虑删除头结点，否则会存在head。next无法被删除掉。
+    //其次如果不调换头结点，假设待删除结点只有一个{1}会出现空指针异常的情况，头结点被删除后，val的指向是一个空指针。
     public ListNode removeElements(ListNode head, int val) {
         if (head == null) {
             return null;
