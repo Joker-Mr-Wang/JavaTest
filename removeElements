@@ -1,0 +1,27 @@
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        //如果是空链表
+        if(head==null){
+              return head;
+        }
+        //删除结点
+        ListNode prev =head;
+        ListNode cur =prev.next;
+        while(cur!=null){
+            if(cur.val==val){
+             //删除节点
+             prev.next=cur.next;
+             //刷新cur结点，让其继续向下寻找
+             cur=prev.next;
+            }else{
+                prev=prev.next;
+                cur=cur.next;
+            }
+        }
+        //如果头结点是需要删除的结点
+        if(head.val==val){
+         head=head.next;
+        }
+        return head;
+    }
+}
