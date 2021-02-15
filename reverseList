@@ -1,0 +1,31 @@
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        //链表为空
+        if(head==null){
+            return head;
+        }
+        //链表只有一个元素
+        if(head.next==null){
+            return head;
+        }
+        //链表有多个元素
+        ListNode newHead =null;
+        ListNode prevNode=null;
+        ListNode curNode =head;
+        while(curNode!=null){
+            //先刷新好下一元素
+            ListNode nextNode =curNode.next;
+            //判断结束
+            if(nextNode==null){
+                //则链表遍历到了末尾，此时需要新链表指向此节点
+                newHead=curNode;
+            }
+            //反转链表
+            curNode.next=prevNode;
+            //刷新元素
+            prevNode=curNode;
+            curNode=nextNode;
+        }   
+        return newHead;
+    }
+}
