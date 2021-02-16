@@ -1,0 +1,39 @@
+package Java_210205;
+
+import java.util.Arrays;
+
+//给定两个整型数组, 交换两个数组的内容.
+public class ChangeArr {
+    public static void main(String[] args) {
+        int[] arr1 = {};
+        int[] arr2 = {1,2,3,4};
+        changeArr(arr1,arr2);
+    }
+//交换两个数组
+    private static void changeArr(int[] arr1, int[] arr2) {
+        //打印一下交换前
+        System.out.println("交换前");
+        System.out.println("arr1"+Arrays.toString(arr1));
+        System.out.println("arr2"+Arrays.toString(arr2));
+        //交换过程
+        //设置一个空数组放置arr1的内容
+        int[] arr=new int[arr1.length];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = arr1[i];
+        }
+        //将arr2的内容放置与arr1里面。
+        arr1=new int[arr2.length];
+        for (int i = 0; i < arr1.length; i++) {
+            arr1[i]=arr2[i];
+        }
+        //将arr1的内容放置与arr2里面。
+        arr2=new int[arr.length];
+        for (int i = 0; i < arr2.length; i++) {
+            arr2[i]=arr[i];
+        }
+        //交换后
+        System.out.println("交换后");
+        System.out.println("arr1"+Arrays.toString(arr1));
+        System.out.println("arr2"+Arrays.toString(arr2));
+    }
+}
