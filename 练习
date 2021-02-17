@@ -31,7 +31,7 @@ public class Solution {
         ListNode cur = head.next; // 待删除节点
         for (;cur != null;) {
             if (cur.val == val) {
-                // 如果找到了值为 val 的节点
+                // 如果找到了值为 val 的节
                 // 就需要删除这个节点
                 prev.next = cur.next;
                 cur = prev.next;
