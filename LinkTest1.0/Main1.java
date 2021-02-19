@@ -246,7 +246,9 @@ private static void removeDummy(Node head,int val) {
 
 
     }
+    
 //遍历链表
+    
     private static void print(Node head) {
         for (Node node=head;node!=null;node=node.next){
             System.out.println(node);
