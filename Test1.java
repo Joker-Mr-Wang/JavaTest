@@ -1,8 +1,8 @@
 package Java_210125;
-//³ı·¨Òì³£
+//é™¤æ³•å¼‚å¸¸
 public class Test1 {
     public static void main(String[] args){
-        //ÀûÓÃtry£¬catch½øĞĞ½ÓÊÕ²¢´¦ÀíÒì³£
+        //åˆ©ç”¨tryï¼Œcatchè¿›è¡Œæ¥æ”¶å¹¶å¤„ç†å¼‚å¸¸
         try {
             int res = choose(10, 0);
             System.out.println(12);
@@ -11,16 +11,16 @@ public class Test1 {
             e.printStackTrace();
 
         }
-        //finallyµÄÓï¾äÒ»¶¨»á±»Ö´ĞĞ£¬ÓÅÏÈÓÚtryºÍcatch
+        //finallyçš„è¯­å¥ä¸€å®šä¼šè¢«æ‰§è¡Œï¼Œä¼˜å…ˆäºtryå’Œcatch
         finally {
             System.out.println(11);
         }
     }
-
-    private static int choose(int i, int j) throws ArithmeticException {//Å×³öÒì³£
+//TODO
+    private static int choose(int i, int j) throws ArithmeticException {//æŠ›å‡ºå¼‚å¸¸
         if (j==0){
-            //Èç¹û±»³ıÊıÎª0£¬throw×Ô¶¨ÒåÒì³£
-            throw new ArithmeticException("ËãÊıÒì³£");
+            //å¦‚æœè¢«é™¤æ•°ä¸º0ï¼Œthrowè‡ªå®šä¹‰å¼‚å¸¸
+            throw new ArithmeticException("ç®—æ•°å¼‚å¸¸");
         }
         return i/j;
     }
