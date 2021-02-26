@@ -16,7 +16,7 @@ public class Test1 {
             System.out.println(11);
         }
     }
-//TODO
+
     private static int choose(int i, int j) throws ArithmeticException {//抛出异常
         if (j==0){
             //如果被除数为0，throw自定义异常
