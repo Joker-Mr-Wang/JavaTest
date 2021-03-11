@@ -20,7 +20,6 @@ public class MyArrayList {
 
 
     //方法.增删改查
-
     //实现扩容
     public void realloc(){
         //先把capacity变大(这里先扩大两倍)
