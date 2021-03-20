@@ -1,5 +1,5 @@
 package Java_210129;
-//写一个递归方法，输入一个非负整数，返回组成它的数字之和
+//鍐欎竴涓�掑綊鏂规硶锛岃緭鍏ヤ竴涓潪璐熸暣鏁帮紝杩斿洖缁勬垚瀹冪殑鏁板瓧涔嬪拰
 public class ReturnNum {
     public static void main(String[] args) {
         int num =123546;
@@ -15,12 +15,12 @@ public class ReturnNum {
     }
 }
 package Java_210129;
-//写一个递归方法，输入一个非负整数，返回组成它的数字之和
+//鍐欎竴涓�掑綊鏂规硶锛岃緭鍏ヤ竴涓潪璐熸暣鏁帮紝杩斿洖缁勬垚瀹冪殑鏁板瓧涔嬪拰
 public class ReturnNum {
     public static void main(String[] args) {
         int num =123546;
         System.out.println(returnNum(num));
-    }
+    } 
 
     private static int returnNum(int num) {
         if (num/10==0){
