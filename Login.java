@@ -1,41 +1,37 @@
-package Java_201213;
+package loge;
 
-import sun.font.TrueTypeFont;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-import java.util.Scanner;
+@WebServlet("/login")
+public class Login extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setHeader("content-type","text/html;charset=utf-8");
+        String name = request.getParameter("uname");
+        String pass = request.getParameter("upass");
 
-//        ±àĞ´´úÂëÄ£ÄâÈı´ÎÃÜÂëÊäÈëµÄ³¡¾°¡£
-//        ×î¶àÄÜÊäÈëÈı´ÎÃÜÂë£¬ÃÜÂëÕıÈ·£¬ÌáÊ¾¡°µÇÂ¼³É¹¦¡±,ÃÜÂë´íÎó£¬
-//        ¿ÉÒÔÖØĞÂÊä Èë£¬×î¶àÊäÈëÈı´Î¡£Èı´Î¾ù´í£¬ÔòÌáÊ¾ÍË³ö³ÌĞò
-public class Login {
+        boolean b = UserData.userLogin(name, pass);  //bæ˜¯ true ç™»é™†æˆåŠŸ      å¦åˆ™å¤±è´¥
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String string="w123456";//ÃÜÂë´®
-            int count =3;
-            while(choose(count)){//ÅĞ¶ÏÑ­»·ÊÇ·ñ½áÊø
-                //ÅĞ¶ÏÃÜÂëÊÇ·ñÕıÈ·
-                System.out.println("ÇëÊäÈëÃÜÂë£º");
-                String next = scanner.next();
-                if (string.equals(next)){
-                    System.out.println("¹§Ï²Äã£¬ÃÜÂëÕıÈ·");
-                   break;
-                }
-                else{
-                    System.out.println("¶Ô²»Æğ£¬ÇëÖØĞÂÊäÈë£¬Äú»¹ÓĞ"+(count-1)+"´Î»ú»á");
-                    count--;
-                }
-            }
+        if (b==true){
+            request.setAttribute("user",name);
+            request.getRequestDispatcher("blog.jsp").forward(request,response);
+        }else{
 
-    }
-    //µ±¼ÆÊıÆ÷Îª3Ê±Ôò½áÊøÑ­»·£»
-    private static boolean choose(int count) {
-        if (count==0){
-            System.out.println("Äú´íÎóµÄ´ÎÊı¹ı¶à£¬ÇëÉÔºóÖØÊÔ");
-            return false;
-        }else {
-            return true;
+            request.setAttribute("mess","ç™»é™†å¤±è´¥");
+            request.getRequestDispatcher("index.jsp").forward(request,response);
+
         }
+
+
     }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request,response);
+    }
 }
